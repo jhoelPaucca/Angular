@@ -1,1 +1,32 @@
-<h2> {{title}} </h2>
+<div *ngIf="visible; else notEnable">
+    <h2> {{title}} </h2>
+</div>
+<button (click)="setVsible()">
+    {{visible? 'Ocultar' : 'Mostrar' }}
+</button>
+<div *ngIf="visible">
+    <table *ngIf="(users != undefined && users.length > 0) else isEmpty">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users;index as i">
+                <td> {{i+1}} </td>
+                <td> {{user}} </td>
+            </tr>
+        </tbody> 
+    </table>
+    <ng-template #isEmpty>
+        <div>
+            No existe resgistro en el sistema!
+        </div>
+    </ng-template>
+</div>
+
+<ng-template #notEnable>
+    <h2>Lo sentimos no esta disponible la pagina!</h2>
+</ng-template>
+
